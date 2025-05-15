@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent Tool</title>
+    <link rel="stylesheet" href="../../css/renter/rent_tool.css">
+</head>
+<body>
+    <div class="container mx-auto my-8">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-2xl font-bold mb-6">Rent Tool</h2>
+
+            <div id="success-message" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4" style="display: none;">
+                <span id="success-text"></span>
+                <p class="mt-2">
+                    <a href="view_rentals.php" class="text-green-700 underline">
+                        View your rentals
+                    </a>
+                </p>
+            </div>
+
+            <div id="error-message" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4" style="display: none;">
+                <span id="error-text"></span>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold mb-4" id="toolName"></h3>
+
+                    <div id="photos-container" class="mb-6 flex space-x-4 overflow-x-auto">
+                
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <p class="text-gray-600">Category</p>
+                            <p class="font-medium" id="toolCategory"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Price per Day</p>
+                            <p class="font-medium" id="toolPrice"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Owner</p>
+                            <p class="font-medium">
+                                <a href="#" id="ownerProfileLink" class="text-blue-600 hover:underline">
+                                    <span id="ownerName"></span>
+                                </a>
+                                <span class="text-sm text-gray-500" id="ownerRating"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-6">
+                        <h4 class="font-semibold mb-4">Rental Details</h4>
+                        <form method="POST" action="" onsubmit="return validateRentalForm(this)">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                                    <input type="date" name="start_date" required
+                                        min="" id="startDateInput"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">End Date</label>
+                                    <input type="date" name="end_date" required
+                                        min="" id="endDateInput"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
+                                </div>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-md mb-6">
+                                <h5 class="font-medium mb-2">Rental Terms</h5>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• 50% security deposit required</li>
+                                    <li>• 10% service fee applies</li>
+                                    <li>• Cancellation available up to 24 hours before rental</li>
+                                    <li>• Tool must be returned in original condition</li>
+                                </ul>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                                Submit Rental Request
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function validateRentalForm(form) {
+        const startDate = new Date(form.start_date.value);
+        const endDate = new Date(form.end_date.value);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (startDate < today) {
+            alert('Start date cannot be in the past.');
+            return false;
+        }
+
+        if (endDate < startDate) {
+            alert('End date must be after start date.');
+            return false;
+        }
+
+        return true;
+    }
+    </script>
+</body>
+</html>

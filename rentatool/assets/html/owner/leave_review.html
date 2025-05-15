@@ -1,0 +1,74 @@
+<div class="container mx-auto my-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Review Renter</h2>
+            <a href="index.php" class="text-blue-600 hover:underline">Back to Dashboard</a>
+        </div>
+
+        <?php if (isset($error)): ?>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                <?php echo htmlspecialchars($error); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="mb-6">
+                <h3 class="font-semibold mb-2">Rental Details</h3>
+                <p>Tool: <?php echo htmlspecialchars($rental['ToolName']); ?></p>
+                <p>Renter: <?php echo htmlspecialchars($rental['RenterFirstName'] . ' ' . $rental['RenterLastName']); ?></p>
+                <p>Dates: <?php 
+                    echo date('M d, Y', strtotime($rental['RentalStartDate'])) . ' - ' . 
+                    date('M d, Y', strtotime($rental['RentalEndDate'])); 
+                ?></p>
+            </div>
+
+<?php if ($existingReviewId): ?>
+    <div class="p-4 bg-green-100 border border-green-400 text-green-700 rounded mb-4 max-w-2xl mx-auto">
+        You have already completed this review.
+    </div>
+<?php else: ?>
+<form method="POST" action="" class="space-y-6 max-w-2xl mx-auto">
+    <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Rating</label>
+        <div class="flex space-x-4">
+            <?php for ($i = 1; $i <= 5; $i++): ?>
+                <label class="flex items-center">
+                    <input type="radio" name="rating" value="<?php echo $i; ?>" required
+                           class="form-radio h-4 w-4 text-blue-600"
+                           <?php echo ($existingRating === $i) ? 'checked' : ''; ?>>
+                    <span class="ml-2"><?php echo $i; ?> ★</span>
+                </label>
+            <?php endfor; ?>
+        </div>
+    </div>
+
+     <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Review</label>
+        <textarea name="comment" required
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+            placeholder="How was your experience with this renter? Did they return the tool in good condition and on time?"><?php echo htmlspecialchars($existingComment); ?></textarea>
+    </div>
+
+    <div class="flex items-center mb-4">
+        <input type="checkbox" id="damage_reported" name="damage_reported" value="1" <?php echo $existingDamageReported ? 'checked' : ''; ?> class="form-checkbox h-4 w-4 text-red-600">
+        <label for="damage_reported" class="ml-2 block text-sm text-gray-700">Tool was returned damaged</label>
+    </div>
+    <?php if ($isPastEndDate): ?>
+    <div class="flex items-center mb-4">
+        <input type="checkbox" id="not_returned" name="not_returned" value="1" <?php echo isset($existingNotReturned) && $existingNotReturned ? 'checked' : ''; ?> class="form-checkbox h-4 w-4 text-red-600">
+        <label for="not_returned" class="ml-2 block text-sm text-gray-700">Tool was not returned</label>
+    </div>
+    <?php endif; ?>
+
+    <button type="submit" 
+        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Submit Review
+    </button>
+</form>
+<?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="../../css/owner/leave_review.css">

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Rentals</title>
+    <link rel="stylesheet" href="../../css/renter/rentals.css">
+</head>
+<body>
+    <div class="container mx-auto my-8">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">My Rentals</h2>
+            <div class="text-sm text-gray-500">
+                Member since: <span id="registrationDate"></span>
+                <div id="userRating" class="flex items-center mt-1">
+                    Your rating: 
+                    <div class="rating-stars">
+                    </div>
+                    <span class="ml-1">(<span id="avgRating"></span> from <span id="reviewCount"></span> reviews)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="no-rentals-message" class="text-gray-500" style="display: none;">No rentals found.</div>
+        
+        <div id="rentals-table" class="bg-white rounded-lg shadow-md overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tool</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Owner</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="rentals-tbody" class="bg-white divide-y divide-gray-200">
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

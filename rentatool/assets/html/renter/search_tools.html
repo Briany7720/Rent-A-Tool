@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Tools</title>
+    <link rel="stylesheet" href="../../css/renter/search_tools.css">
+</head>
+<body>
+    <div class="container mx-auto my-8">
+        <h2 class="text-2xl font-bold mb-4">Search Tools</h2>
+        <form method="GET" action="" class="mb-6 flex flex-wrap items-center gap-3">
+            <input type="text" name="search" placeholder="Search for tools or owners..." required
+                id="searchInput"
+                class="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-48">
+            <select name="category" class="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-40" id="categorySelect">
+                <option value="">All Categories</option>
+                <option value="Hand Tools">Hand Tools</option>
+                <option value="Power Tools">Power Tools</option>
+                <option value="Garden Tools">Garden Tools</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="text" name="location" placeholder="Filter by location"
+                id="locationInput"
+                class="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-40">
+            <select name="delivery" class="border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-40" id="deliverySelect">
+                <option value="">All Delivery Options</option>
+                <option value="Pickup Only">Pickup Only</option>
+                <option value="Delivery Available">Delivery Available</option>
+                <option value="Both">Both</option>
+            </select>
+            <button type="submit" class="bg-blue-600 text-white px-4 py-1 rounded hover:bg-blue-700 h-8">
+                Search
+            </button>
+        </form>
+
+        <p id="no-tools-message" class="text-gray-600" style="display: none;">No tools found matching your search criteria.</p>
+        
+        <div id="tools-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+           
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("JavaScript is running");
+
+        
+        <?php if (isset($_GET['search'])): ?>
+        document.getElementById('searchInput').value = '<?php echo htmlspecialchars($_GET['search']); ?>';
+        <?php endif; ?>
+        
+        <?php if (isset($_GET['category'])): ?>
+        document.getElementById('categorySelect').value = '<?php echo htmlspecialchars($_GET['category']); ?>';
+        <?php endif; ?>
+        
+        <?php if (isset($_GET['location'])): ?>
+        document.getElementById('locationInput').value = '<?php echo htmlspecialchars($_GET['location']); ?>';
+        <?php endif; ?>
+        
+        <?php if (isset($_GET['delivery'])): ?>
+        document.getElementById('deliverySelect').value = '<?php echo htmlspecialchars($_GET['delivery']); ?>';
+        <?php endif; ?>
+        
+        
+        <?php if (empty($tools)): ?>
+        console.log("No tools found");
+        document.getElementById('no-tools-message').style.display = 'block';
+        document.getElementById('tools-container').style.display = 'none';
+        <?php else: ?>
+        const toolsContainer = document.getElementById('tools-container');
+        const tools = <?php echo json_encode($tools, JSON_HEX_TAG | JSON_HEX_APOS); ?>;
+        console.log("Tools to render:", tools);
+
+        tools.forEach(tool => {
+            const toolCard = document.createElement('div');
+            toolCard.className = 'bg-white rounded-lg shadow p-4 flex flex-col';
+
+            
+            if (tool.PhotoPath) {
+                toolCard.innerHTML += `
+                    <img src="<?php echo BASE_URL; ?>${tool.PhotoPath}" alt="Tool Image" class="h-24 w-auto object-cover rounded mb-4">
+                `;
+            } else {
+                toolCard.innerHTML += `
+                    <div class="h-48 w-full bg-gray-200 rounded mb-4 flex items-center justify-center text-gray-500">
+                        No Image
+                    </div>
+                `;
+            }
+
+            
+            toolCard.innerHTML += `
+                <h3 class="text-lg font-semibold mb-1">${tool.Name}</h3>
+                <p class="text-sm text-gray-600 mb-1">Owner: <a href="<?php echo BASE_URL; ?>dashboard/shared/user_profile.php?user_id=${tool.OwnerID}" class="text-blue-600 hover:underline">${tool.FirstName} ${tool.LastName}</a></p>
+                <p class="text-sm text-gray-600 mb-1">Category: ${tool.Category}</p>
+                <p class="text-sm text-gray-600 mb-1">Location: ${tool.Location || ''}</p>
+                <p class="text-sm text-gray-600 mb-1">Delivery Option: ${tool.DeliveryOption || ''}</p>
+                <p class="text-sm font-medium mb-4">$${parseFloat(tool.PricePerDay).toFixed(2)} per day</p>
+                <a href="rent_tool.php?tool_id=${tool.ToolID}" class="mt-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-center">
+                    Rent
+                </a>
+            `;
+
+            console.log("Appending tool card:", toolCard);
+            toolsContainer.appendChild(toolCard);
+        });
+        <?php endif; ?>
+    });
+    </script>
+</body>
+</html>

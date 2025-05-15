@@ -1,0 +1,216 @@
+/* General Reset and Font */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  body {
+    background-color: #fff;
+    color: #111;
+  }
+  
+  /* Header */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #111;
+    color: #fff;
+    padding: 1rem 2rem;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    background-color: #FFA500;
+    border-radius: 50%;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    color: #FFA500;
+  }
+  
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .nav-link:hover {
+    color: #FFA500;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    color: #888;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+  }
+  
+  .search-placeholder {
+    font-size: 0.9rem;
+  }
+  
+  .search-icon {
+    width: 16px;
+    height: 16px;
+    background-color: #FFA500;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+  }
+  
+  /* Welcome Section */
+  .welcome-section {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+  
+  .welcome-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .welcome-text {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    background-color: #FFA500;
+    border: none;
+    color: #111;
+    padding: 0.6rem 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #ff8800;
+  }
+  
+  /* Why Section */
+  .why-section {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #111;
+  }
+  
+  .section-text {
+    margin-bottom: 1.5rem;
+    color: #444;
+  }
+  
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .feature {
+    background-color: #fff;
+    padding: 1.5rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .feature-title {
+    font-size: 1.2rem;
+    color: #111;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-text {
+    color: #555;
+  }
+  
+  /* Featured Tools */
+  .featured-tools {
+    padding: 3rem 2rem;
+    background-color: #fff;
+    text-align: center;
+  }
+  
+  .tools {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+  
+  .tool {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .tool-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #111;
+  }
+  
+  /* Community Section */
+  .community-section {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+  
+  /* Login Section */
+  .login-section {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    background-color: #f5f5f5;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: #111;
+    color: #ccc;
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+  
+  .footer-nav {
+    margin-top: 0.5rem;
+  }
+  
+  .footer-link {
+    color: #FFA500;
+    margin: 0 0.5rem;
+    text-decoration: none;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  
